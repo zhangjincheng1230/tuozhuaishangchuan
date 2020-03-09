@@ -1,0 +1,223 @@
+@import './element-ui';
+#app {
+  font-family: MicrosoftYaHei, 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /*text-align: center;*/
+  color: #2c3e50;
+}
+body{
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+}
+.customer-drawer {
+  .el-dialog__wrapper {
+    top: 105px!important;
+    left: 200px!important;
+  }
+  :last-child {
+    display: none!important;
+  }
+}
+button, div, input[type=text], li, ol, span, table, td, textarea, th, tr, ul {
+  box-sizing: border-box;
+}
+a, button, input, li, span, textarea {
+  outline: none;
+}
+body, html, #app{
+  width: 100%;
+  height: 100%;
+}
+body, button, dd, dl, form, h1, h2, h3, h4, h5, h6, input, menu, ol, p, pre, table, td, textarea, th, ul {
+  margin: 0;
+  padding: 0;
+}
+abbr, address, b, caption, cite, code, dfn, em, i, input, select, small, strong, textarea, th, var {
+  font-size: 100%;
+  font-style: normal;
+}
+blockquote, body, button, dd, dl, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, menu, ol, p, pre, table, td, textarea, th, ul {
+  margin: 0;
+  padding: 0;
+}
+button, div, input[type=text], li, ol, span, table, td, textarea, th, tr, ul {
+  box-sizing: border-box;
+}
+.app-main {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 5px 5px;
+  background: #f7f7f7;
+}
+.kj-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  padding: 0 14px;
+}
+.kj-head {
+  width: 100%;
+  height: 55px;
+  line-height: 55px;
+  box-sizing: border-box;
+  text-align: left;
+}
+.kj-button-group {
+  float: right;
+  .el-dropdown {
+    line-height: 1;
+  }
+}
+.kj-main {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 55px);
+  overflow: hidden;
+}
+.table-container {
+  height: calc(100% - 30px)
+}
+.kj-card {
+  .kj-head {
+    border-bottom: solid 1px #EEEEEE;
+  }
+  .kj-main {
+    padding-top: 15px;
+    overflow: auto;
+  }
+  .card-table-head {
+    width: 100%;
+    height: 55px;
+    line-height: 55px;
+  }
+}
+.query-info {
+  display: inline-flex;
+  font-size: 14px;
+  height: 32px;
+  line-height: 32px;
+  margin: auto 0;
+}
+.query-period {
+  display: inline-block;
+  cursor: pointer;
+  border: solid 1px #E6E6E6;
+  border-radius: 5px;
+  padding: 0 10px;
+}
+.query-corp {
+  margin-left: 20px;
+  white-space: nowrap;
+  text-overflow:ellipsis;
+  overflow: hidden;
+  max-width: 300px;
+  min-width: 150px;
+}
+.query-popover {
+  .query-footer {
+    margin-top: 20px;
+    .condition-control {
+      display: inline-block;
+    }
+  }
+  .el-form-item {
+    margin-bottom: 10px;
+  }
+}
+.row-operate {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  visibility: hidden;
+
+  i {
+    cursor: pointer;
+    display: block;
+    font-size: 15px;
+  }
+  .el-icon-remove-outline {
+    margin-top: 3px;
+  }
+}
+
+tr:hover .row-operate {
+  visibility: visible;
+}
+
+.clearfix:after {
+  content: " ";
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both;
+}
+.spanlink{
+  color: rgb(64, 158, 255);
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  z-index: 9999;
+  cursor: pointer
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type="number"]{
+  -moz-appearance: textfield;
+}
+.preview figure {
+  float: left;
+  width: 30%;
+  height:calc(30vw - 0px);
+  margin: 1.5%;
+}
+
+.preview figure img {
+  width: 100%;
+}
+
+.popover-no-padding {
+  padding: 0;
+}
+
+.percent-number:after {
+  content: "%";
+  position: absolute;
+  top: 0;
+  right: 3px;
+}
+
+.kj-nested-dialog {
+  top: 111px;
+  right: 15px;
+  bottom: 15px;
+  left: 200px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.collapse-menu .kj-nested-dialog {
+  left: 80px;
+}
+
+.announcement-dialog {
+  background: url("~@/assets/home/announcement-background.png");
+  width: 700px;
+  height: 400px;
+}
+.announcement-dialog .el-message-box__close {
+  color: #fff;
+  font-size: 18px;
+}
+.announcement-dialog .el-message-box__title {
+  color: #fff;
+  text-align: center;
+}
+.announcement-dialog .el-message-box__content {
+  margin-top: 100px;
+}

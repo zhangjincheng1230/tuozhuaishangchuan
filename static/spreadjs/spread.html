@@ -1,0 +1,186 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>纳税填报</title>
+  <link href = "gcspread.sheets.9.40.20153.0.css" rel='stylesheet' type='text/css'/>
+  <script src = "gcspread.sheets.all.9.40.20153.0.min.js" type='text/javascript'></script>
+  <script src = "jquery-1.8.2.min.js" type='text/javascript'></script>
+</head>
+<body>
+<div class="grid-wrap" id='maincontents' >
+  <div id='spreadjs'  class="mod-inner">
+    <div id="ss" style='display:block;'></div>
+  </div>
+</div>
+</body>
+<script type="text/javascript">
+  window.addEventListener('message', function (event) {//
+        let data = event.data;
+        let type = data.type
+        if(type == "open"){
+            open(data.data);
+        }else if(type == "recal"){
+            recal("recal");
+        }else if(type == "recalall"){
+            recal("recalall");
+        }else if(type == "check"){
+            checkSheet(data);
+        }
+  });
+
+  //校验
+  function checkSheet(data) {
+      let spread = $("#ss").data("spread");
+
+      let errormsg = "";
+
+      let sc = data.data;
+      if(sc) {
+          for(let ival = 0; ival < sc.length; ival++) {
+              let formula = sc[ival];
+              let symbol;
+              if (formula.indexOf(">=") >= 0)
+              {
+                  symbol = ">=";
+              }
+              else if (formula.indexOf(">") >= 0)
+              {
+                  symbol = ">";
+              }
+              else if (formula.indexOf("<=") >= 0)
+              {
+                  symbol = "<=";
+              }
+              else if (formula.indexOf("<") >= 0)
+              {
+                  symbol = "<";
+              }
+              else if (formula.indexOf("==") >= 0)
+              {
+                  symbol = "==";
+              }
+              let index = formula.indexOf(symbol);
+              let lF = formula.substring(0, index);
+              let rF = formula.substring(index + symbol.length);
+              let lV = GcSpread.Sheets.Calc.evaluateFormula(spread.getActiveSheet(), lF, 0, 0, false);
+              let rV = GcSpread.Sheets.Calc.evaluateFormula(spread.getActiveSheet(), rF, 0, 0, false)
+
+              let cond = "" + lV + symbol + rV;
+              if ('#VALUE!' == lV || '#VALUE!' == rV)
+              {
+                  errormsg += (errormsg.length > 0 ? '<br><br>' : '违反下列规则:<br>') + formula + "<br>(数值：" + cond + ")";
+              }
+              else if (eval(cond) == false)
+              {
+                  errormsg += (errormsg.length > 0 ? '<br><br>' : '违反下列规则:<br>') + formula + "<br>(数值：" + cond + ")";
+              }
+
+          }
+      }
+
+      errormsg = errormsg.replace(/\==/g, '=');
+      if (errormsg.length > 200)
+      {
+          errormsg = errormsg.substring(0, 200) + "... ... ...";
+      }
+
+      let dd = {};
+      dd.errormsg = errormsg;
+      dd.jsonString = JSON.stringify(spread.toJSON());
+      mypostMessage(dd, "check")
+  }
+  function mypostMessage(data, type){
+      let dd = {};
+      dd.data = data;
+      dd.type = type;
+      window.parent.postMessage(dd, "*");
+  }
+  //重算
+  function recal(type){
+      let spread = $("#ss").data("spread");
+      let sheet = spread.getActiveSheet();
+      let stname = sheet.getName();
+      let jsonString = JSON.stringify(spread.toJSON());
+
+      let data ={};
+      data.jsonString = jsonString;
+      data.stname = stname;
+      mypostMessage(data, type)
+  }
+
+  //打开
+  function open(data){
+      initSpreadJs(data);
+      let spread = $("#ss").data("spread");
+      spread.refresh();
+  }
+
+  function initSpreadJs(jsonStr){
+
+//	$('#ss').height(Public.setGrid(10,'spreadjs').h);
+//	$('#ss').width(Public.setGrid(10,'spreadjs').w);
+
+      let spread = $("#ss").data("spread");
+      if (spread)
+      {
+          spread.destroy();
+      }
+
+      _inherit = function (d, b) {
+          for (var p in b) {
+              if (b.hasOwnProperty(p)) {
+                  d[p] = b[p];
+              }
+          }
+          function __() {
+              this.constructor = d;
+          }
+          __.prototype = b.prototype;
+          d.prototype = new __();
+      };
+      let oldAction = GcSpread.Sheets.UndoRedo.ClipboardPasteUndoAction;
+      let newAction = function (sheet, srcSheet, destSheet, pasteExtent, option) {
+          option = GcSpread.Sheets.ClipboardPasteOptions.Values;
+          oldAction.call(this, sheet, srcSheet, destSheet, pasteExtent, option);
+      }
+      _inherit(newAction, oldAction);
+      GcSpread.Sheets.UndoRedo.ClipboardPasteUndoAction = newAction;
+
+      //创建spread表对象
+      new GcSpread.Sheets.Spread(document.getElementById("ss"), { sheetCount: 1});
+
+      spread = $("#ss").data("spread");
+
+
+      spread.fromJSON(JSON.parse(jsonStr));
+
+      // if (isJS()) {
+      //     dealJmxzList();
+      // }
+
+      spread.newTabVisible(false);
+      spread.tabEditable(false);
+
+
+      spread.canUserEditFormula(false);
+      spread.canUserDragDrop(false);
+      spread.canUserDragFill(false);
+      spread.enableFormulaTextbox(true);
+
+      spread.allowSheetReorder(false);
+
+      spread.allowUserResize(true);
+
+      for (let iscnt = 0; iscnt <spread.sheets.length; iscnt++)
+      {
+          let sheet = spread.sheets[iscnt];
+          sheet.protectionOption({
+              allowResizeRows: true,
+              allowResizeColumns: true,
+              allowSort: false
+          });
+      }
+
+  }
+</script>
+</html>

@@ -1,0 +1,31 @@
+<template>
+  <div style="width: 1000px;height: 500px;border: 1px solid #000; margin: auto;">
+    <div style="width: 600px;overflow-y: auto;float: left;">
+      <img :src="imgUrlBase + '?id=' + billDetailInfo.imgsourid + '&name=' + billDetailInfo.imgname + '&pk_corp=' + billDetailInfo.corpId" style="width: 100%;"/>
+    </div>
+    <div style="width: 370px;overflow-y: auto;float: right;height: 500px;">
+      <div v-for="keyName in billDetailInfoKey" :key="keyName" style="text-align: left">
+        <span style="width:100px;display: inline-block;">{{keyName}}:</span>
+        <span style="width:auto;">{{billDetailInfo[keyName]}}</span>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+  // import {postAxios} from '../../libs/axios'
+  export default {
+    props: {
+      billDetailInfo: {
+        type: Object
+      }
+    },
+    computed: {},
+    data () {
+      return {}
+    },
+    methods: {},
+    beforeDestroy () {
+    },
+    mounted () {}
+  }
+</script>

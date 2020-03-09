@@ -1,0 +1,104 @@
+@import "./blue";
+@import "./black";
+
+.horizontal-collapse-transition {
+  transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
+}
+.header-right .cp-date .el-input__inner{
+  // background: none!important;
+  border: none!important;
+  font-size:13px;
+  font-family:MicrosoftYaHei;
+  //font-weight:600;
+  color:rgba(255,255,255,1);
+  //opacity:0.6;
+  cursor: pointer;
+}
+.header-right .cp-date .el-input__prefix {
+  /*display: none;*/
+  left: auto;
+  right: 14px;
+  margin-top: 1px;
+}
+.header-right .cp-date .el-input__prefix .el-icon-arrow-down:before {
+  font-size: 16px;
+}
+/*
+@media screen and (min-width: 1367px) and (max-width:1920px) {
+  iframe {
+    padding: 0 -2% 0 -2.7%;
+  }
+}
+*/
+.search-company-name{
+  margin-bottom: 10px;
+}
+.search-company-name input {
+  text-align: center;
+}
+.search-company-table-head th{
+  background: #e9edf0 !important;
+  padding: 2px 0!important;
+  color: #484848;
+}
+.header-panel .el-dialog {
+  border-radius: 10px;
+}
+.sidebar-menu-footer {
+  height: 50px;
+  border-top: 1px solid rgba(50, 53, 72, 0.1);
+}
+.menu-admin{
+  border: none!important;
+}
+.sidebar-menu-head {
+  height: 50px;
+  border-bottom: 1px solid rgba(50,53,72, .1);
+}
+.sidebar-menu-head img {
+  zoom: .5; cursor: pointer
+}
+.sidebar-menu {
+  height: calc(100% + 50px);
+  border-right: none!important;
+
+}
+.sidebar-menu:not(.el-menu--collapse) {
+  width: 180px;
+  min-height: 400px;
+}
+
+.sidebar-panel .open-menu .happy-scroll-container {
+  width: 200px!important;
+  overflow-x: hidden;
+}
+.sidebar-panel .close-menu .happy-scroll-container {
+  width: auto!important;
+  overflow-x: hidden;
+}
+.sidebar-panel .happy-scroll-container::-webkit-scrollbar {
+  width:0;
+}
+
+.el-menu-item-group__title {
+  padding: 0!important;
+}
+.sidebar-main{
+  /*height: 100%;*/
+}
+.el-dropdown-menu--medium .el-dropdown-menu__item div{
+  line-height: 30px;
+  padding: 2px 17px;
+  font-size: 12px;
+}
+.select-company{
+  min-width: auto!important;
+  width: 280px!important;
+  .el-select-dropdown__list{
+    .el-select-dropdown__item {
+      span {
+        font-size: 12px;
+      }
+    }
+  }
+}
