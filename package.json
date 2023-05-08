@@ -24,7 +24,7 @@
     "mockjs": "^1.0.1-beta3",
     "natural-orderby": "^2.0.3",
     "nprogress": "^0.2.0",
-    "qs": "^6.6.0",
+    "qs": "^6.6.1",
     "rightmenu": "^1.0.2",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "uuid": "^3.3.3",
